@@ -1,20 +1,9 @@
 <!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8">
     <title>Meetup Events</title>
-</head>
-<body>
-    <h1>Meetup Events</h1>
-    {% for event in events %}
-        <div>
-            <h3>{{ event.title }}</h3>
-            <p>{{ event.description }}</p>
-            <p><strong>Date:</strong> {{ event.date }}</p>
-            <p><strong>Location:</strong> {{ event.location }}</p>
-        </div>
-    {% empty %}
-        <p>No events yet.</p>
-    {% endfor %}
+
 </body>
 </html>
