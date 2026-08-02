@@ -1,26 +1,9 @@
 <!DOCTYPE html>
-<!-- Template: event_form.html
-    Purpose: Used for both creating and editing events. Renders `EventForm`.
--->
+
 <html>
 <head>
     <meta charset="utf-8">
     <title>{{ title }}</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f8fafc; padding: 40px; }
-        .card { max-width: 600px; margin: auto; background: white; padding: 24px; border-radius: 12px; }
-        input, textarea, button { width: 100%; padding: 10px; margin-top: 10px; border-radius: 8px; border: 1px solid #ccc; }
-        button { background: #16a34a; color: white; border: none; cursor: pointer; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>{{ title }}</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Save</button>
-        </form>
-    </div>
+
 </body>
 </html>
