@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reminders</title>
+</head>
+<body>
+    <h1>Upcoming reminders</h1>
+    {% for event in upcoming %}
+        <div>
+            <h3>{{ event.title }}</h3>
+            <p><strong>Date:</strong> {{ event.date }}</p>
+        </div>
+    {% empty %}
+        <p>No upcoming events.</p>
+    {% endfor %}
+</body>
+</html>
