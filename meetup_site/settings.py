@@ -51,19 +51,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "meetup_site.wsgi.application"
-
+#===========================================REPLACE WITH YOUR MYSQL DATABASE CONFIGURATION===========================================
 # MySQL database configuration for the meetup app
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "meetup_db",
-        "USER": "django_user",
-        "PASSWORD": "StrongPassword123!",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "NAME": "meetup_db", #MYSQL SCHEMA NAME
+        "USER": "django_user", #MYSQL USERNAME
+        "PASSWORD": "StrongPassword123!", #MYSQL PASSWORD
+        "HOST": "localhost", #MYSQL HOST
+        "PORT": "3306", #MYSQL PORT
     }
 }
-
+#=====================================================================================================================
 # Password rules for user accounts
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
