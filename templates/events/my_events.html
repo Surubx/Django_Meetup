@@ -1,5 +1,32 @@
 <!DOCTYPE html>
-
-
+<!-- Template: my_events.html
+    Purpose: Displays events the current user has joined. Useful as a
+    quick personal view of upcoming scheduled items.
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My Joined Events</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .card { background: white; padding: 16px; margin-top: 16px; border-radius: 10px; }
+        a { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Events You Joined</h2>
+        <a href="{% url 'event_list' %}">Back to all events</a>
+        {% for event in events %}
+            <div class="card">
+                <h3>{{ event.title }}</h3>
+                <p>{{ event.description }}</p>
+                <p><strong>Date:</strong> {{ event.date }} | <strong>Location:</strong> {{ event.location }}</p>
+            </div>
+        {% empty %}
+            <div class="card">You have not joined any events yet.</div>
+        {% endfor %}
+    </div>
 </body>
 </html>

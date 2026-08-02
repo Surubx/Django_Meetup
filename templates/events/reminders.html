@@ -1,4 +1,30 @@
 <!DOCTYPE html>
-
+<!-- Template: reminders.html
+    Purpose: Shows upcoming events that the user has joined (in-app reminders).
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Event Reminders</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8fafc; margin: 0; padding: 20px; }
+        .container { max-width: 900px; margin: auto; }
+        .card { background: white; padding: 16px; margin-top: 16px; border-radius: 10px; }
+        a { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Upcoming Event Reminders</h2>
+        <a href="{% url 'event_list' %}">Back to all events</a>
+        {% for event in upcoming %}
+            <div class="card">
+                <h3>{{ event.title }}</h3>
+                <p><strong>Date:</strong> {{ event.date }} | <strong>Location:</strong> {{ event.location }}</p>
+            </div>
+        {% empty %}
+            <div class="card">No upcoming events.</div>
+        {% endfor %}
+    </div>
 </body>
 </html>
