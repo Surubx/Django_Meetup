@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from .models import Event
 
-#To run the tests, use the command:
+# To run the tests, use the command:
 # .\.venv\Scripts\python.exe manage.py test events --settings=meetup_site.settings_test
 """Test suite for the events app.
 
@@ -16,15 +16,6 @@ workflow tests that exercise the request/response paths (create, join, leave).
 The workflow tests run against a temporary test database (configured via
 `meetup_site.settings_test` in CI or local test runs).
 """
-
-from datetime import timedelta
-
-from django.contrib.auth import get_user_model
-from django.test import TestCase
-from django.urls import reverse
-from django.utils import timezone
-
-from .models import Event
 
 
 class EventModelTests(TestCase):
@@ -98,7 +89,7 @@ class EventWorkflowTests(TestCase):
 
 
 class EventBehaviorBDDTests(TestCase):
-    """Behavior-focused tests written in Given/When/Then style."""
+    """Feature: Event participation workflow."""
 
     def setUp(self):
         self.organizer = get_user_model().objects.create_user(username="charlie", password="secret123")
@@ -111,8 +102,30 @@ class EventBehaviorBDDTests(TestCase):
             organizer=self.organizer,
         )
 
-    def test_given_guest_when_visiting_events_then_redirected_to_login(self):
-        """Given a guest user, when opening events list, then they are redirected."""
+    def shortDescription(self):
+        descriptions = {
+            "test_given_guest_user_when_visiting_events_then_redirected_to_login": (
+                "Given a guest user,\n"
+                "When visiting the events page,\n"
+                "Then they are redirected to login.\n"
+            ),
+            "test_given_logged_in_user_when_creating_event_then_event_is_persisted": (
+                "Given a logged-in user,\n"
+                "When creating a valid event,\n"
+                "Then it is persisted.\n"
+            ),
+            "test_given_non_attendee_when_joining_then_can_join_and_leave": (
+                "Given a non-attendee,\n"
+                "When joining the event,\n"
+                "Then they can join and leave it.\n"
+            ),
+        }
+        return descriptions.get(self._testMethodName)
+
+    def test_given_guest_user_when_visiting_events_then_redirected_to_login(self):
+        """Given a guest user,
+        When visiting the events page,
+        Then they are redirected to login."""
         # Given: an unauthenticated visitor
         # When: they request the event list page
         response = self.client.get(reverse("event_list"))
@@ -122,7 +135,9 @@ class EventBehaviorBDDTests(TestCase):
         self.assertIn("/login/", response.url)
 
     def test_given_logged_in_user_when_creating_event_then_event_is_persisted(self):
-        """Given an authenticated user, when posting valid event data, then event is saved."""
+        """Given a logged-in user,
+        When creating a valid event,
+        Then it is persisted."""
         # Given: a logged-in user and valid event payload
         self.client.force_login(self.organizer)
         payload = {
@@ -140,7 +155,9 @@ class EventBehaviorBDDTests(TestCase):
         self.assertTrue(Event.objects.filter(title="BDD Demo Session", organizer=self.organizer).exists())
 
     def test_given_non_attendee_when_joining_then_can_join_and_leave(self):
-        """Given a user not attending, when joining then leaving, then attendee list updates."""
+        """Given a non-attendee,
+        When joining the event,
+        Then they can join and leave it."""
         # Given: another logged-in user who is not yet an attendee
         self.client.force_login(self.attendee)
         self.assertFalse(self.event.attendees.filter(pk=self.attendee.pk).exists())
