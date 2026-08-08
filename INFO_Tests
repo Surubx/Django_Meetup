@@ -17,10 +17,7 @@ C:/Users/Stone/AppData/Local/Python/pythoncore-3.14-64/python.exe manage.py test
 Optional: run tests with higher verbosity:
 python manage.py test -v 2
 
-To see Given/When/Then-style results clearly, run only the BDD class:
-python manage.py test events.tests.EventBehaviorBDDTests -v 2
+CUCUMBER BDD TESTS
 
-Expected output includes test names like:
-- test_given_guest_when_visiting_events_then_redirected_to_login
-- test_given_logged_in_user_when_creating_event_then_event_is_persisted
-- test_given_non_attendee_when_joining_then_can_join_and_leave
+python -m behave --format=plain --no-capture
+

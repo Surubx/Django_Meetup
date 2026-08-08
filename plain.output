@@ -1,0 +1,22 @@
+Feature: Event participation
+
+  Scenario: Guest user visits the events page
+    Given a guest user is present ... passed in 0.001s
+    When the user visits the events page ... passed in 0.016s
+    Then the user is redirected to login ... passed in 0.000s
+
+  Scenario: Logged-in user creates a valid event
+    Given a logged-in user is present ... passed in 0.313s
+    When the user creates a valid event ... passed in 0.090s
+    Then the event is saved successfully ... passed in 0.001s
+
+  Scenario: Logged-in user joins an event
+    Given a logged-in attendee is present ... passed in 0.541s
+    When the user joins an existing event ... passed in 0.067s
+    Then the event shows the user as an attendee ... passed in 0.001s
+
+  Scenario: Logged-in user leaves an event
+    Given a logged-in attendee who has joined an event is present ... passed in 0.582s
+    When the user leaves the event ... passed in 0.063s
+    Then the event no longer shows the user as an attendee ... passed in 0.001s
+
